@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+    <h3 ><strong><i>Update Contact</i></strong></h3>
+    <br>
+    <div class="card">
+        {% if contact.image %}
+            <div style="text-align: center; margin: 15px;">
+                <img src="{{ contact.image.url }}" alt="your image" width="300">
+            </div>
+        {% endif %}
+        <div class="card-header">
+            {{ contact.first_name }} {{ contact.last_name }}'s Profile
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <br>
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back</a>
+                <a href="{% url 'delete' contact.id %}" class="btn btn-outline-danger">Delete</a>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+
+        <br>
+    </div><br>
+
+    <!-- <input type="text" disabled> -->
+
+
+{% endblock %}
