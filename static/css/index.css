@@ -34,14 +34,15 @@ a {
 /* id selector */
 #form-container {
     background-color: #ffffff;
-    width: 25%;
-    height: 300px;
+    /* width: 25%;
+    height: 300px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center; 
     border-radius: 10px;
     box-shadow: #212529 3px 3px 8px;
+    padding: 40px;
 
     /* position */
     position: absolute;

@@ -1,9 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}
-Registration
+Register
 {% endblock %}
 
 {% block content %}
-    <h1>Register</h1>
-    <p>Check it up</p>
+    <div class="login-container">
+        <form method="POST" action="{% url 'register_user' %}" id="form-container">
+            {% csrf_token %}
+            <h2>Register</h2>
+            <div class="first_name">
+                <input type="text" placeholder="First Name" class="input-f" name="first_name">
+            </div>
+            <div class="last_name">
+                <input type="text" placeholder="Last Name" class="input-f" name="last_name">
+            </div>
+            <div class="email">
+                <input type="email" placeholder="Email" class="input-f" name="email">
+            </div>
+            <div class="username">
+                <input type="text" placeholder="Username" class="input-f" name="username">
+            </div>
+            <div class="password">
+                <input type="password" placeholder="Password" class="input-f" name="password">
+            </div>
+            <div class="confirm_password">
+                <input type="text" placeholder="Confirm Password" class="input-f" name="confirm_password">
+            </div>
+            <div class="btn">
+                <input type="submit" value="REGISTER">
+            </div>
+            <p><span>Already has an account? </span> <a href="#">Sign In</a></p>
+        </form>
+    </div>
 {% endblock %}

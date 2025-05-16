@@ -4,7 +4,8 @@ Address Book
 {% endblock %}
 
 {% block content %}
-<h1>Address Book</h1><br>
+    {% if user.is_authenticated %}
+        <h1>Address Book</h1><br>
 
 <table class="table table-striped table-hover table-bordered">
     <thead class="table-dark">
@@ -51,6 +52,5 @@ Address Book
     </tbody>
 </table>
 
-<ul>
-    {% endblock%}
-</ul>
+    {% endif %}
+{% endblock%}

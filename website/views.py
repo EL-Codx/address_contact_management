@@ -3,6 +3,8 @@ from .models import Contact
 from .forms import UpdateForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 
 # login
@@ -36,7 +38,37 @@ def logout_user(request):
 
 # register
 def register_user(request):
-    return render(request, 'register.html', {})
+    if request.method == "POST":
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        email = request.POST["email"]
+        username = request.POST["username"]
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
+        
+        # checking if passwords match before proceding 
+        if password != confirm_password:
+            messages.error(request, "Passords do not match")
+            return render(request, 'register.html', {})
+        
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists", {})
+            return render(request, 'register.html', {})
+        
+        # creating user
+        user = User.objects.create_superuser(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            username=username,
+            password=password
+        )
+        
+        messages.success(request, "Admin account created successfully. Please login!")
+        return redirect('login_user')
+            
+    else:
+        return render(request, 'register.html', {})
 
 
 # home page
@@ -89,4 +121,10 @@ def add_contact(request):
     else:
         render(request, 'add_contact.html', {'form': form})
     return render(request, 'add_contact.html', {'form': form})
+
+
+
+# profile update
+def profile_edit(request):
+    return render(request, 'profile.html', {})
 

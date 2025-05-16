@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<div>
+    <form method="POST" action="{% url 'profile_edit' %}" class="form-container">
+        {% csrf_token %}
+        <h2>User Profile</h2>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="First Name">
+        </div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Last Name">
+        </div>
+        <div class="mb-3">
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+        </div>
+        <button class="btn btn-secondary">Update</button>
+    </form>
+
+    <br><br>
+    <button class="btn btn-primary">Reset Password</button>
+</div>
+{% endblock %}
