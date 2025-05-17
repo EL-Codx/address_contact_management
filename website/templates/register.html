@@ -24,12 +24,12 @@ Register
                 <input type="password" placeholder="Password" class="input-f" name="password">
             </div>
             <div class="confirm_password">
-                <input type="text" placeholder="Confirm Password" class="input-f" name="confirm_password">
+                <input type="password" placeholder="Confirm Password" class="input-f" name="confirm_password">
             </div>
             <div class="btn">
                 <input type="submit" value="REGISTER">
             </div>
-            <p><span>Already has an account? </span> <a href="#">Sign In</a></p>
+            <p><span>Already has an account? </span> <a href="{% url 'login_user' %}">Sign In</a></p>
         </form>
     </div>
 {% endblock %}

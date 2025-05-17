@@ -126,5 +126,51 @@ def add_contact(request):
 
 # profile update
 def profile_edit(request):
-    return render(request, 'profile.html', {})
+    # getting user
+    user = request.user
+    
+    if request.method == "POST":
+        # taking the input form the frontend
+        user_first_name = request.POST["first_name"]
+        user_last_name = request.POST["last_name"]
+        user_email = request.POST["email"]
+        
+        # assigning to the user model infos
+        user.first_name = user_first_name
+        user.last_name = user_last_name
+        user.email = user_email
+        
+        # saving the data into the database
+        user.save()        
+        
+        # sending success message
+        messages.success(request, "Profile update successful!")
+        return redirect("profile_edit")
+    
+    return render(request, 'profile.html', {
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email,
+    })
 
+
+def change_password(request):
+    user = request.user
+    
+    if request.method == "POST":
+        new_password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
+        
+        if new_password and confirm_password:
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password changed successfully! Please login again.")
+                logout(request)
+                return redirect("login_user")
+            else:
+                messages.error(request, "Passwords do not match.")
+                
+        else:
+            messages.error(request, "all fields required")
+    
